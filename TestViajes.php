@@ -1,6 +1,6 @@
 <?php
 include 'Viajes.php';
-
+//hola hola
 /** 
  * Función que inicializa una estructura de datos con ejemplos de viajes y retorna la colección
  * @return array
@@ -63,7 +63,7 @@ function seleccionarOpcion() {
         // Function solicitarNumeroEntre($min, $max), reusada el archivo tateti.php
     return $opcion;
 }
-//hola hola
+
 //Inicialización de variables
 $viajesRealizados=[];
 $j= 1;
