@@ -1,8 +1,7 @@
 <?php
 include 'Viajes.php';
-//hola hola
-/** 
- * Función que inicializa una estructura de datos con ejemplos de viajes y retorna la colección
+//hola hola hola hola
+ /** Función que inicializa una estructura de datos con ejemplos de viajes y retorna la colección
  * @return array
  */
 function datosPasajeros(){
