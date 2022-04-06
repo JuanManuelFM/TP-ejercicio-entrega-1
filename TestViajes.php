@@ -1,6 +1,5 @@
 <?php
 include 'Viajes.php';
-//hola hola hola hola
  /** Función que inicializa una estructura de datos con ejemplos de viajes y retorna la colección
  * @return array
  */
@@ -80,18 +79,12 @@ do {
                 $viaje= new Viajes($unCodigo, $unDestino, $pasajeros);
                 $nuevaPosicion=count($viajesRealizados);
                 $viajesRealizados[$nuevaPosicion]=$viaje;
-                while($j<=$viajesRealizados){
-                    
-                    $j++;
-                }
-                //if($pasajeros > $auxColeccion){}
+                //while($j<=$viajesRealizados){$j++;}
         break;
         case 2:    
-            //se muestra en pantalla los datos de una partida guardada en el arreglo
-            $maximo = count($datosViajes);
-            echo "Ingrese el numero del viaje que desea ver: ";
-            $numeroValido = solicitarNumeroEntre($minimo, $maximo);
-            mostrarJuego($numeroValido, $arregloJuego);
+            echo "****************************** \n";
+            echo "Opción aun no terminada \n";
+            echo "****************************** \n";
         break;
         case 3: 
             echo "****************************** \n";

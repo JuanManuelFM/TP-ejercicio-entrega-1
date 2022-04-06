@@ -1,7 +1,4 @@
 <?php
-
-//holahola
-
 class Viajes{
     //atributos
     private $codigo;
