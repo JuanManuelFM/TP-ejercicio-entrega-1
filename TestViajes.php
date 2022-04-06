@@ -64,7 +64,6 @@ function seleccionarOpcion() {
 
 //Inicialización de variables
 $viajesRealizados=[];
-$j= 1;
 //Proceso
 do {
     $opcion = seleccionarOpcion();
