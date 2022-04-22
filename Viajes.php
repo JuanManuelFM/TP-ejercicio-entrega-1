@@ -5,15 +5,14 @@ class Viajes{
     private $destino;
     private $cantidadMaxPasajeros;
     private $coleccionPasajeros;
-    private $responsableViaje;
+    //private $responsableViaje;
 
-    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $responsableV){
+    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados){
         $this->codigo=$unCodigo;
         $this->destino=$unDestino;
         $this->cantidadMaxPasajeros=$pasajeros;
-        $this->responsableViaje=$responsableV;
+        //$this->ResponsableViaje=$responsableV;
         $this->coleccionPasajeros=$pasajerosRegistrados;
-        //$this->$responsableViaje="";
     }
     public function setCodigo($unCodigo){
         $this->codigo=$unCodigo;
@@ -23,9 +22,6 @@ class Viajes{
     }
     public function setCantidadMaxPasajeros($pasajeros){
         $this->cantidadMaxPasajeros=$pasajeros;
-    }
-    public function setResponsableViaje($responsableV){
-        $this->responsableViaje=$responsableV;
     }
     public function setColeccionPasajeros($pasajerosRegistrados){
         $this->coleccionPasajeros=$pasajerosRegistrados;
@@ -40,15 +36,12 @@ class Viajes{
     public function getCantidadMaxPasajeros(){
         return $this->cantidadMaxPasajeros;
     }
-    public function getResponsableViaje(){
-        $this->responsableViaje;
-    }
     public function getColeccionPasajeros(){
         return $this->coleccionPasajeros;
     }
     
-        /**
-     * Este modulo agrega un nuevo pasajero al final del array pasajero existente.
+    /**
+     * Este modulo agrega un nuevo pasajero al final del array de pasajeros existente.
      * @param object $nuevoObjPasajero
     */
     public function agregarPasajeros($nuevoObjPasajero){
