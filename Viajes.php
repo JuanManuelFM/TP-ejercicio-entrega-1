@@ -43,6 +43,16 @@ class Viajes{
         return $this->coleccionPasajeros;
     }
     
+        /**
+     * Este modulo agrega un nuevo pasajero al final del array pasajero existente.
+     * @param object $nuevoObjPasajero
+    */
+    public function agregarPasajero($nuevoObjPasajero){
+        $arrayPasajeros = $this->getColeccionPasajeros();
+        array_push($arrayPasajeros, $nuevoObjPasajero);
+        $this->getColeccionPasajeros($arrayPasajeros);
+    }
+
     public function __toString(){
         $arrayPasajeros= $this->getColeccionPasajeros(); 
         $datosPasajeros="";
