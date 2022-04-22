@@ -24,6 +24,8 @@ function solicitarNumeroEntre($min, $max)
     return $numero;
 }
 
+
+
 /**
  * Función que muestra las opciones del menú en la pantalla
  * @return int
@@ -124,26 +126,33 @@ do {
                     $buscandoViaje= false;
                     $pasajerosGuardados=$viajesRealizados[$p]->getCantidadMaxPasajeros();
                     $coleccionPasajerosGuardados=$viajesRealizados[$p]->getColeccionPasajeros();
+                    
+                    if($pasajerosGuardados >= count($coleccionPasajerosGuardados)){
+                        echo "ingrese nombre de nuevo pasajero: ";
+                        $nombrePasajero=strtoupper(trim(fgets(STDIN)));
+                        echo "Ingrese apellido de pasajero: ";
+                        $apellidoPasajero=strtoupper(trim(fgets(STDIN)));
+                        echo "Ingrese telefono de pasajero: ";
+                        $telefonoPasajero=strtoupper(trim(fgets(STDIN)));
+                        echo "Ingrese documento de pasajero: ";
+                        $numeroDocumento=strtoupper(trim(fgets(STDIN)));
+                        echo "****************************************** \n";
+                        $pasajero= new Pasajeros($nombrePasajero, $apellidoPasajero, $telefonoPasajero, $numeroDocumento);
+                        $pasajerosRegistrados[$p]=$pasajero;
+                        array_push($viajesRealizados, $pasajerosRegistrados);
+                        $viajesRealizados[$p]->setColeccionPasajeros($pasajerosRegistrados);
                     }
-                elseif($pasajerosGuardados < count($coleccionPasajerosGuardados)){
-                    echo "ingrese nombre de nuevo pasajero: ";
-                    $nombrePasajero=strtoupper(trim(fgets(STDIN)));
-                    echo "Ingrese apellido de pasajero: ";
-                    $apellidoPasajero=strtoupper(trim(fgets(STDIN)));
-                    echo "Ingrese telefono de pasajero: ";
-                    $telefonoPasajero=strtoupper(trim(fgets(STDIN)));
-                    echo "Ingrese documento de pasajero: ";
-                    $numeroDocumento=strtoupper(trim(fgets(STDIN)));
-                    echo "****************************************** \n";
-                    $pasajero= new Pasajeros($nombrePasajero, $apellidoPasajero, $telefonoPasajero, $numeroDocumento);
-                    $pasajerosRegistrados[$p]=$pasajero;
+                    else{
+                        echo "No hay más lugares disponibles en este viaje";
+                        echo "****************************************** \n";
                     }
-                elseif($pasajerosGuardados == count($coleccionPasajerosGuardados)){
-                    echo "No hay más lugares disponibles en este viaje";
-                    echo "****************************************** \n";
-                    }
-                    $i++;
                 }
+                else{
+                    $p++;
+                }
+                
+            }
+
         break;
         case 4: 
             $buscar= true;
