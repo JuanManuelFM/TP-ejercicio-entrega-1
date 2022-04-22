@@ -148,9 +148,7 @@ do {
                 else{
                     $p++;
                 }
-                
             }
-
         break;
         case 4: 
             $buscar= true;

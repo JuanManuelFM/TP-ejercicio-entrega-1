@@ -50,7 +50,7 @@ class Viajes{
     public function agregarPasajeros($nuevoObjPasajero){
         $arrayPasajeros = $this->getColeccionPasajeros();
         array_push($arrayPasajeros, $nuevoObjPasajero);
-        $this->getColeccionPasajeros($arrayPasajeros);
+        $this->setColeccionPasajeros($arrayPasajeros);
     }
 
     public function __toString(){
