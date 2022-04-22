@@ -32,9 +32,9 @@ function solicitarNumeroEntre($min, $max)
 function seleccionarOpcion() {
     $minimo = 1;
     $maximo = 3;
-        echo"1) Crear nuevo viaje \n";
-        echo"2) Modificar datos de un pasajero \n";
-        echo"3) Ver datos de viajes realizados \n";
+        echo"1) :----------Crear nuevo viaje---------: \n";
+        echo"2) :---Modificar datos de un pasajero---: \n";
+        echo"3) :---Ver datos de viajes realizados---: \n";
         $opcion = solicitarNumeroEntre($minimo, $maximo);
         // Function solicitarNumeroEntre($min, $max), reusada el archivo tateti.php
     return $opcion;
