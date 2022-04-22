@@ -5,12 +5,14 @@ class Viajes{
     private $destino;
     private $cantidadMaxPasajeros;
     private $coleccionPasajeros;
+    private $responsableViaje;
 
     public function __construct($unCodigo, $unDestino, $pasajeros){
         $this->codigo=$unCodigo;
         $this->destino=$unDestino;
         $this->cantidadMaxPasajeros=$pasajeros;
         $this->coleccionPasajeros=[];
+        //$this->$responsableViaje="";
     }
     public function setCodigo($unCodigo){
         $this->codigo=$unCodigo;
@@ -24,8 +26,8 @@ class Viajes{
     /** 
     * @param array $unArray
     */
-    public function setColeccionPasajeros($pasajerosArray){
-        $this->coleccionPasajeros=$pasajerosArray;
+    public function setColeccionPasajeros($pasajerosRegistrados){
+        $this->coleccionPasajeros=$pasajerosRegistrados;
     }
 
     public function getCodigo(){
@@ -40,27 +42,15 @@ class Viajes{
     public function getColeccionPasajeros(){
         return $this->coleccionPasajeros;
     }
-    public function nuevoPasajero(){
-        $auxPasajeros=$this->getColeccionPasajeros();
-        $nuevaPosicion=count($auxPasajeros);
-
-        if ($nuevaPosicion < $this->getCantidadMaxPasajeros()){
-        echo "Ingrese el nombre del pasajero: ";
-        $nombre=trim(fgets(STDIN));
-        echo "Ingrese el apellido del pasajero: ";
-        $apellido=trim(fgets(STDIN));
-        echo "Ingrese el documento del pasajero: ";
-        $documento=trim(fgets(STDIN));
-        $nuevoPasajero=["nombre"=>$nombre, "apellido"=>$apellido, "documento"=>$documento];
-        $auxPasajeros[$nuevaPosicion]=$nuevoPasajero;
-        $this->setColeccionPasajeros($auxPasajeros);
-        }
-        else
-        echo "No hay más lugar";
-    }
+    
     public function __toString(){
-        return ("Codigo de viaje " . $this->getCodigo(). " destino " . $this->getDestino() . " cantidad de pasajeros " . $this->getCantidadMaxPasajeros());
-
+        $arrayPasajeros= $this->getColeccionPasajeros(); 
+        $datosPasajeros="";
+        for ($i = 0; $i < count($arrayPasajeros); $i++){
+            $objPasajero=$arrayPasajeros[$i];
+            $datosPasajeros= $datosPasajeros . "Nombre del pasajero " . $objPasajero->getNombre(). " de apellido " . $objPasajero->getApellido() . "\n" . "Telefono: " . $objPasajero->getTelefono() . "\n" . "Numero de Documento: " . $objPasajero->getDocumento() . "\n";
+        }
+        return ("Codigo de viaje " . $this->getCodigo(). " destino " . $this->getDestino() . " cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros);
     }
 }
 
