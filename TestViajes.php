@@ -45,7 +45,7 @@ function seleccionarOpcion() {
 //Inicialización de variables
 $viajesRealizados=[];
 $pasajerosRegistrados=[];
-//Datos pasajeros predefinidos para chequear funcionalidad de opciones 2 y 3 del menú
+//Datos pasajeros predefinidos para chequear funcionalidad de opciones del menú
 $p1= new Pasajeros("JUAN", "MARTIN", "345", "43948491");
 $p2= new Pasajeros("DAVID", "MARTINEZ", "456", "43948490");
 $pasajerosRegistrados[0]=$p1;
@@ -55,7 +55,7 @@ $v1= new Viajes("456", "MADRID", 3);
 $v1->setColeccionPasajeros($pasajerosRegistrados);
 $viajesRealizados[0]=$v1;
 
-//Proceso
+//Proceso de ejecutamiento del menú
 do {
     $opcion = seleccionarOpcion();
     switch ($opcion) {
@@ -85,9 +85,6 @@ do {
                         $pasajero= new Pasajeros($nombrePasajero, $apellidoPasajero, $telefonoPasajero, $numeroDocumento);
                         $pasajerosRegistrados[$j]=$pasajero;
                     }
-                        else{ 
-                        echo "Se llegó al limite de pasajeros del viaje";
-                    }
                 }
                 $viaje->setColeccionPasajeros($pasajerosRegistrados);
                 $nuevaPosicionViaje=count($viajesRealizados);
@@ -112,12 +109,42 @@ do {
                     $viajesRealizados[$i]->setCantidadMaxPasajeros($pasajerosViaje1);
                     echo "****************************************** \n";
                 }
+                $i++;
             }
         break;
         case 3: 
-           
+            $buscandoViaje= true;
+            $p=0;
+            echo "****************************************** \n";
+            echo "Ingrese el código del viaje en el que desea agregar un pasajero: ";
+            $codigoViajeGuardado=strtoupper(trim(fgets(STDIN)));
+            while($p < count($viajesRealizados) && $buscandoViaje){
+                $codigoBuscado=$viajesRealizados[$p]->getCodigo();
+                if($codigoViajeGuardado == $codigoBuscado){
+                    $buscandoViaje= false;
+                    $pasajerosGuardados=$viajesRealizados[$p]->getCantidadMaxPasajeros();
+                    $coleccionPasajerosGuardados=$viajesRealizados[$p]->getColeccionPasajeros();
+                    }
+                elseif($pasajerosGuardados < count($coleccionPasajerosGuardados)){
+                    echo "ingrese nombre de nuevo pasajero: ";
+                    $nombrePasajero=strtoupper(trim(fgets(STDIN)));
+                    echo "Ingrese apellido de pasajero: ";
+                    $apellidoPasajero=strtoupper(trim(fgets(STDIN)));
+                    echo "Ingrese telefono de pasajero: ";
+                    $telefonoPasajero=strtoupper(trim(fgets(STDIN)));
+                    echo "Ingrese documento de pasajero: ";
+                    $numeroDocumento=strtoupper(trim(fgets(STDIN)));
+                    echo "****************************************** \n";
+                    $pasajero= new Pasajeros($nombrePasajero, $apellidoPasajero, $telefonoPasajero, $numeroDocumento);
+                    $pasajerosRegistrados[$p]=$pasajero;
+                    }
+                elseif($pasajerosGuardados == count($coleccionPasajerosGuardados)){
+                    echo "No hay más lugares disponibles en este viaje";
+                    echo "****************************************** \n";
+                    }
+                    $i++;
+                }
         break;
-
         case 4: 
             $buscar= true;
             $i=0;
