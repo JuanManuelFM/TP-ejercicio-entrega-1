@@ -24,7 +24,7 @@ class ResponsableV{
     public function setApellido($apellidoResponsable){
         $this->apellido=$apellidoResponsable;
     }
-    
+
     public function getNumeroEmpleado(){
         return $this->numeroEmpleado;
     }
@@ -37,4 +37,12 @@ class ResponsableV{
     public function getApellido(){
         return $this->apellido;
     }
+
+    public function __toString(){
+        return ("El encargado del viaje fué el empleado n° " . $this->getNumeroEmpleado(). " de licencia n° " . $this->getNumeroLicencia() . "\n" . "Nombre responsable  " . $this->getNombre() . " de apellido " . $this->getApellido() . "\n");
+
+    }
+    
+
+
 }

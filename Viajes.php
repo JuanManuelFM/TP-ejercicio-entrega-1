@@ -7,11 +7,12 @@ class Viajes{
     private $coleccionPasajeros;
     private $responsableViaje;
 
-    public function __construct($unCodigo, $unDestino, $pasajeros, $coleccionPasajeros){
+    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $responsableV){
         $this->codigo=$unCodigo;
         $this->destino=$unDestino;
         $this->cantidadMaxPasajeros=$pasajeros;
-        $this->coleccionPasajeros=$coleccionPasajeros;
+        $this->responsableViaje=$responsableV;
+        $this->coleccionPasajeros=$pasajerosRegistrados;
         //$this->$responsableViaje="";
     }
     public function setCodigo($unCodigo){
@@ -20,12 +21,12 @@ class Viajes{
     public function setDestino($unDestino){
         $this->destino=$unDestino;
     }
-    public function setCantidadMaxPasajeros($unCanPasajeros){
-        $this->cantidadMaxPasajeros=$unCanPasajeros;
+    public function setCantidadMaxPasajeros($pasajeros){
+        $this->cantidadMaxPasajeros=$pasajeros;
     }
-    /** 
-    * @param array $unArray
-    */
+    public function setResponsableViaje($responsableV){
+        $this->responsableViaje=$responsableV;
+    }
     public function setColeccionPasajeros($pasajerosRegistrados){
         $this->coleccionPasajeros=$pasajerosRegistrados;
     }
@@ -38,6 +39,9 @@ class Viajes{
     }
     public function getCantidadMaxPasajeros(){
         return $this->cantidadMaxPasajeros;
+    }
+    public function getResponsableViaje(){
+        $this->responsableViaje;
     }
     public function getColeccionPasajeros(){
         return $this->coleccionPasajeros;
