@@ -31,10 +31,12 @@ function solicitarNumeroEntre($min, $max)
 
 function seleccionarOpcion() {
     $minimo = 1;
-    $maximo = 3;
-        echo"1) :----------Crear nuevo viaje---------: \n";
-        echo"2) :---Modificar datos de un pasajero---: \n";
-        echo"3) :---Ver datos de viajes realizados---: \n";
+    $maximo = 5;
+        echo"1) :-----------Crear nuevo viaje-----------: \n";
+        echo"2) :------Modificar datos de un viaje------: \n";
+        echo"3) :-Agregar pasajero a viaje ya existente-: \n";
+        echo"4) :-----Modificar datos de un pasajero----: \n";
+        echo"5) :-----Ver datos de viajes realizados----: \n";
         $opcion = solicitarNumeroEntre($minimo, $maximo);
         // Function solicitarNumeroEntre($min, $max), reusada el archivo tateti.php
     return $opcion;
@@ -44,12 +46,12 @@ function seleccionarOpcion() {
 $viajesRealizados=[];
 $pasajerosRegistrados=[];
 //Datos pasajeros predefinidos para chequear funcionalidad de opciones 2 y 3 del menú
-$p1= new Pasajeros("Juan", "matin", "345", "456");
-$p2= new Pasajeros("david", "martin", "456", "678");
+$p1= new Pasajeros("JUAN", "MARTIN", "345", "43948491");
+$p2= new Pasajeros("DAVID", "MARTINEZ", "456", "43948490");
 $pasajerosRegistrados[0]=$p1;
 $pasajerosRegistrados[1]=$p2;
 
-$v1= new Viajes("456", "Madrid", 3);
+$v1= new Viajes("456", "MADRID", 3);
 $v1->setColeccionPasajeros($pasajerosRegistrados);
 $viajesRealizados[0]=$v1;
 
@@ -58,16 +60,19 @@ do {
     $opcion = seleccionarOpcion();
     switch ($opcion) {
         case 1: 
-                echo "Ingrese numero de codigo del viaje: ";
+                echo "****************************************** \n";
+                echo ">--Ingrese numero de codigo del viaje: ";
                 $unCodigo=strtoupper(trim(fgets(STDIN)));
-                echo "Ingrese el destino: ";
+                echo ">--Ingrese el destino: ";
                 $unDestino=strtoupper(trim(fgets(STDIN)));
-                echo "Ingrese cantidad de pasajeros: ";
+                echo ">--Ingrese cantidad de pasajeros: ";
                 $pasajeros=trim(fgets(STDIN));
+                echo "****************************************** \n";
                 $viaje= new Viajes($unCodigo, $unDestino, $pasajeros);
                 
                 for($j = 0; $j < $pasajeros; $j++){
                     if ($j <= $pasajeros){
+                        echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ \n";
                         echo "ingrese nombre de nuevo pasajero: ";
                         $nombrePasajero=strtoupper(trim(fgets(STDIN)));
                         echo "Ingrese apellido de pasajero: ";
@@ -76,6 +81,7 @@ do {
                         $telefonoPasajero=strtoupper(trim(fgets(STDIN)));
                         echo "Ingrese documento de pasajero: ";
                         $numeroDocumento=strtoupper(trim(fgets(STDIN)));
+                        echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ \n";
                         $pasajero= new Pasajeros($nombrePasajero, $apellidoPasajero, $telefonoPasajero, $numeroDocumento);
                         $pasajerosRegistrados[$j]=$pasajero;
                     }
@@ -88,40 +94,66 @@ do {
                 $viajesRealizados[$nuevaPosicionViaje]=$viaje;
         break;
         case 2: 
-                $buscar= true;
-                $i=0;
-                $pasajeros=$pasajerosRegistrados;
-                //$arrayPasajeros1=$pasajeros->getDocumento($pasajerosRegistrados);
-                echo "Ingrese el documento de la persona cuyo nombre, apellido y/o telefono quiera modificar: ";
-                $documentoPasajero1=strtoupper(trim(fgets(STDIN)));
-                while($i < count($pasajerosRegistrados) && $buscar){
-                    $codigoEncontrar=$pasajerosRegistrados[$i]->getDocumento();
-                    if($codigoEncontrar == $documentoPasajero1){
-                        $buscar= false;
-                        echo "ingrese nuevamente el nombre del pasajero: ";
-                        $nombrePasajero1=strtoupper(trim(fgets(STDIN)));
-                        $pasajerosRegistrados[$i]->setNombre($nombrePasajero1);
-                        echo "Ingrese nuevamente el apellido del pasajero: ";
-                        $apellidoPasajero1=strtoupper(trim(fgets(STDIN)));
-                        $pasajerosRegistrados[$i]->setApellido($apellidoPasajero1);
-                        echo "Ingrese nuevamente el telefono del pasajero: ";
-                        $telefonoPasajero1=strtoupper(trim(fgets(STDIN)));
-                        $pasajerosRegistrados[$i]->setTelefono($telefonoPasajero1);
-                    }
+            $buscar= true;
+            $i=0;
+            $viajes1=$viajesRealizados;
+            echo "****************************************** \n";
+            echo "Ingrese el codigo del viaje cuyo destino y/o cantidad de pasajeros quiera modificar: ";
+            $codigoViaje1=strtoupper(trim(fgets(STDIN)));
+            while($i < count($viajesRealizados) && $buscar){
+                $codigoEncontrar=$viajesRealizados[$i]->getCodigo();
+                if($codigoEncontrar == $codigoViaje1){
+                    $buscar= false;
+                    echo "Ingrese nuevamente el destino del viaje: ";
+                    $destinoViaje1=strtoupper(trim(fgets(STDIN)));
+                    $viajesRealizados[$i]->setDestino($destinoViaje1);
+                    echo "Ingrese nuevamente el número de pasajeros del viaje: ";
+                    $pasajerosViaje1=strtoupper(trim(fgets(STDIN)));
+                    $viajesRealizados[$i]->setCantidadMaxPasajeros($pasajerosViaje1);
+                    echo "****************************************** \n";
                 }
+            }
         break;
         case 3: 
-            echo "****************************** \n";
+           
+        break;
+
+        case 4: 
+            $buscar= true;
+            $i=0;
+            $pasajeros=$pasajerosRegistrados;
+            echo "****************************************** \n";
+            echo "Ingrese el documento de la persona cuyo nombre, apellido y/o telefono quiera modificar: ";
+            $documentoPasajero1=strtoupper(trim(fgets(STDIN)));
+            while($i < count($pasajerosRegistrados) && $buscar){
+                $documentoEncontrar=$pasajerosRegistrados[$i]->getDocumento();
+                if($documentoEncontrar == $documentoPasajero1){
+                    $buscar= false;
+                    echo "ingrese nuevamente el nombre del pasajero: ";
+                    $nombrePasajero1=strtoupper(trim(fgets(STDIN)));
+                    $pasajerosRegistrados[$i]->setNombre($nombrePasajero1);
+                    echo "Ingrese nuevamente el apellido del pasajero: ";
+                    $apellidoPasajero1=strtoupper(trim(fgets(STDIN)));
+                    $pasajerosRegistrados[$i]->setApellido($apellidoPasajero1);
+                    echo "Ingrese nuevamente el telefono del pasajero: ";
+                    $telefonoPasajero1=strtoupper(trim(fgets(STDIN)));
+                    $pasajerosRegistrados[$i]->setTelefono($telefonoPasajero1);
+                    echo "****************************************** \n";
+                 }
+                 $i++;
+            }
+        break;
+
+        case 5: 
+            echo "****************************************** \n";
             for ($i=0; $i < count($viajesRealizados); $i++){
                 //$miViaje= $viajesRealizados[$i];
-                echo $viajesRealizados[$i] . "\n";
+                echo $viajesRealizados[$i];
             }
-            echo "****************************** \n";
-            
-            
+            echo "****************************************** \n";
         break;
     }
-} while (($opcion <= 3) && ($opcion >= 1));
+} while (($opcion <= 5) && ($opcion >= 1));
 
 
 

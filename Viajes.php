@@ -50,7 +50,7 @@ class Viajes{
             $objPasajero=$arrayPasajeros[$i];
             $datosPasajeros= $datosPasajeros . "Nombre del pasajero " . $objPasajero->getNombre(). " de apellido " . $objPasajero->getApellido() . "\n" . "Telefono: " . $objPasajero->getTelefono() . "\n" . "Numero de Documento: " . $objPasajero->getDocumento() . "\n";
         }
-        return ("Codigo de viaje " . $this->getCodigo(). " destino " . $this->getDestino() . " cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros);
+        return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros);
     }
 }
 
