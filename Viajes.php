@@ -7,11 +7,11 @@ class Viajes{
     private $coleccionPasajeros;
     private $responsableViaje;
 
-    public function __construct($unCodigo, $unDestino, $pasajeros){
+    public function __construct($unCodigo, $unDestino, $pasajeros, $coleccionPasajeros){
         $this->codigo=$unCodigo;
         $this->destino=$unDestino;
         $this->cantidadMaxPasajeros=$pasajeros;
-        $this->coleccionPasajeros=[];
+        $this->coleccionPasajeros=$coleccionPasajeros;
         //$this->$responsableViaje="";
     }
     public function setCodigo($unCodigo){
@@ -47,7 +47,7 @@ class Viajes{
      * Este modulo agrega un nuevo pasajero al final del array pasajero existente.
      * @param object $nuevoObjPasajero
     */
-    public function agregarPasajero($nuevoObjPasajero){
+    public function agregarPasajeros($nuevoObjPasajero){
         $arrayPasajeros = $this->getColeccionPasajeros();
         array_push($arrayPasajeros, $nuevoObjPasajero);
         $this->getColeccionPasajeros($arrayPasajeros);
@@ -56,9 +56,8 @@ class Viajes{
     public function __toString(){
         $arrayPasajeros= $this->getColeccionPasajeros(); 
         $datosPasajeros="";
-        for ($i = 0; $i < count($arrayPasajeros); $i++){
-            $objPasajero=$arrayPasajeros[$i];
-            $datosPasajeros= $datosPasajeros . "Nombre del pasajero " . $objPasajero->getNombre(). " de apellido " . $objPasajero->getApellido() . "\n" . "Telefono: " . $objPasajero->getTelefono() . "\n" . "Numero de Documento: " . $objPasajero->getDocumento() . "\n";
+        foreach($arrayPasajeros as $pasajero){
+            $datosPasajeros=$datosPasajeros . "\n" . $pasajero . "\n";
         }
         return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros);
     }

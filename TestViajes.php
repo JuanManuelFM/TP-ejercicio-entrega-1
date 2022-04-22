@@ -53,7 +53,7 @@ $p2= new Pasajeros("DAVID", "MARTINEZ", "456", "43948490");
 $pasajerosRegistrados[0]=$p1;
 $pasajerosRegistrados[1]=$p2;
 
-$v1= new Viajes("456", "MADRID", 3);
+$v1= new Viajes("456", "MADRID", 3, $pasajerosRegistrados);
 $v1->setColeccionPasajeros($pasajerosRegistrados);
 $viajesRealizados[0]=$v1;
 
@@ -138,9 +138,7 @@ do {
                         $numeroDocumento=strtoupper(trim(fgets(STDIN)));
                         echo "****************************************** \n";
                         $pasajero= new Pasajeros($nombrePasajero, $apellidoPasajero, $telefonoPasajero, $numeroDocumento);
-                        $pasajerosRegistrados[$p]=$pasajero;
-                        array_push($viajesRealizados, $pasajerosRegistrados);
-                        $viajesRealizados[$p]->setColeccionPasajeros($pasajerosRegistrados);
+                        $viajesRealizados[$p]->agregarPasajeros($pasajero);
                     }
                     else{
                         echo "No hay más lugares disponibles en este viaje";
