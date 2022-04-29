@@ -1,15 +1,23 @@
 <?php
 class ResponsableV{
     //atributos
-    private $numeroEmpleado;
-    private $licencia;
     private $nombre;
     private $apellido;
-
-    public function __construct($numEmpleado, $numlicencia, $nombreResponsable, $apellidoResponsable){
-        $this->numeroEmpleado=$unCodigo;
-        $this->numeroLicencia=$unDestino;
+    private $numeroEmpleado;
+    private $licencia;
+    
+    public function __construct($nombreResponsable, $apellidoResponsable, $numEmpleado, $numlicencia){
         $this->nombre=$nombreResponsable;
+        $this->apellido=$apellidoResponsable;
+        $this->numeroEmpleado=$numEmpleado;
+        $this->numeroLicencia=$numlicencia;
+        
+    }
+
+    public function setNombre($nombreResponsable){
+        $this->nombre=$nombreResponsable;
+    }
+    public function setApellido($apellidoResponsable){
         $this->apellido=$apellidoResponsable;
     }
     public function setNumeroEmpleado($numEmpleado){
@@ -18,29 +26,23 @@ class ResponsableV{
     public function setNumeroLicencia($numLicencia){
         $this->numeroLicencia=$numLicencia;
     }
-    public function setNombre($nombreResponsable){
-        $this->nombre=$nombreResponsable;
-    }
-    public function setApellido($apellidoResponsable){
-        $this->apellido=$apellidoResponsable;
-    }
-
-    public function getNumeroEmpleado(){
-        return $this->numeroEmpleado;
-    }
-    public function getNumeroLicencia(){
-        return $this->numeroLicencia;
-    }
+    
     public function getNombre(){
         return $this->nombre;
     }
     public function getApellido(){
         return $this->apellido;
     }
+    public function getNumeroEmpleado(){
+        return $this->numeroEmpleado;
+    }
+    public function getNumeroLicencia(){
+        return $this->numeroLicencia;
+    }
+    
 
     public function __toString(){
-        return ("El encargado del viaje fué el empleado n° " . $this->getNumeroEmpleado(). " de licencia n° " . $this->getNumeroLicencia() . "\n" . "Nombre responsable  " . $this->getNombre() . " de apellido " . $this->getApellido() . "\n");
-
+        return ("El encargado del viaje fue: " . $this->getNombre() . " de apellido " . $this->getApellido() . "\n" . "N° de empleado: " . $this->getNumeroEmpleado(). " de licencia " . $this->getNumeroLicencia() . "\n");
     }
     
 

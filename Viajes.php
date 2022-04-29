@@ -5,14 +5,14 @@ class Viajes{
     private $destino;
     private $cantidadMaxPasajeros;
     private $coleccionPasajeros;
-    //private $responsableViaje;
+    private $objResponsableV;
 
-    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados){
+    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $objResViaje){
         $this->codigo=$unCodigo;
         $this->destino=$unDestino;
         $this->cantidadMaxPasajeros=$pasajeros;
-        //$this->ResponsableViaje=$responsableV;
         $this->coleccionPasajeros=$pasajerosRegistrados;
+        $this->objResponsableV=$objResViaje;
     }
     public function setCodigo($unCodigo){
         $this->codigo=$unCodigo;
@@ -25,6 +25,9 @@ class Viajes{
     }
     public function setColeccionPasajeros($pasajerosRegistrados){
         $this->coleccionPasajeros=$pasajerosRegistrados;
+    }
+    public function setObjResponsableV($objResViaje){
+        $this->objResponsableV=$objResViaje;
     }
 
     public function getCodigo(){
@@ -39,7 +42,41 @@ class Viajes{
     public function getColeccionPasajeros(){
         return $this->coleccionPasajeros;
     }
+    public function getObjResponsableV(){
+        return $this->objResponsableV;
+    }
     
+    /**METODO PARA BUSCAR UN PASAJERO, PARA AGREGAR O MODIFICAR SIRVE
+     * public function buscarPasajero($dniPasajeroBuscar){
+     * $arregloPasajeros= $this->getColeccionPasajeros();
+     * $posicionCo1= -1;
+     * $i = 0;
+     * $encontrado= false;
+     *      while ($i < count($arregloPasajeros) && !$encontrado){
+     *          $unPasajero = $arregloPasajeros[$i];
+     *          $encontrado = ($unPasajero->getDocumento() == $dniPasPrevio);
+     *          $i=$i+1;
+     *      }
+     * $posicionCo1= ($encontrado?($i-1):-1);
+     * return $posicionCo1;
+     * }
+     * 
+     * 
+     */
+
+
+    /*EN EL CASE 5 LO COMENTADO REQUERIRÍA DE LA SIGUIENTE FUNCIÓN
+    * public function modificarPasajero($posColPasajeroI, $nombrePasajeroI, $apellidoPasajeroI, $telefonoPasajeroI){
+    * $arregloPasajeros= $this->getColeccionPasajeros();
+    * $objPasajeroMod = $arregloPasajeros[$posColPasajeroI];
+    * $objPasajeroMod->setNombre($nombrePasajeroI);
+    * $objPasajeroMod->setApellido($apellidoPasajeroI);
+    * $objPasajeroMod->setTelefono($telefonoPasajeroI);
+    * }
+    * 
+    * 
+    */
+
     /**
      * Este modulo agrega un nuevo pasajero al final del array de pasajeros existente.
      * @param object $nuevoObjPasajero
@@ -53,10 +90,10 @@ class Viajes{
     public function __toString(){
         $arrayPasajeros= $this->getColeccionPasajeros(); 
         $datosPasajeros="";
-        foreach($arrayPasajeros as $pasajero){
-            $datosPasajeros=$datosPasajeros . "\n" . $pasajero . "\n";
+        foreach($arrayPasajeros as $objPasajeros){
+            $datosPasajeros=$datosPasajeros . "\n" . $objPasajero . "\n";
         }
-        return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros);
+        return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros . "\n" . $this->getObjResponsableV() . "\n");
     }
 }
 

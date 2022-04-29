@@ -1,6 +1,7 @@
 <?php
 include 'Viajes.php';
 include 'Pasajeros.php';
+include 'ResponsableV.php';
 
 /**
  * Modificar la clase Viaje para que ahora los pasajeros sean un objeto que tenga los atributos nombre, apellido, numero de documento y teléfono. El viaje ahora contiene una referencia a una colección de objetos de la clase Pasajero. También se desea guardar la información de la persona responsable de realizar el viaje, para ello cree una clase ResponsableV que registre el número de empleado, número de licencia, nombre y apellido. La clase Viaje debe hacer referencia al responsable de realizar el viaje. 
@@ -49,14 +50,16 @@ function seleccionarOpcion() {
 $viajesRealizados=[];
 $pasajerosRegistrados=[];
 //Datos pasajeros predefinidos para chequear funcionalidad de opciones del menú
+//public function __construct($numEmpleado, $numlicencia, $nombreResponsable, $apellidoResponsable)
+$objResViaje= new ResponsableV("GUILLERMO", "PEROJO", "1234", "45678");
 $p1= new Pasajeros("JUAN", "MARTIN", "345", "43948491");
 $p2= new Pasajeros("DAVID", "MARTINEZ", "456", "43948490");
 $pasajerosRegistrados[0]=$p1;
 $pasajerosRegistrados[1]=$p2;
 
-$v1= new Viajes("456", "MADRID", 3, $pasajerosRegistrados);
-$v1->setColeccionPasajeros($pasajerosRegistrados);
-$viajesRealizados[0]=$v1;
+$viajeEjemplo= new Viajes("456", "MADRID", 3, $pasajerosRegistrados, $objResViaje);
+$viajeEjemplo->setColeccionPasajeros($pasajerosRegistrados);
+$viajesRealizados[0]=$viajeEjemplo;
 
 //Proceso de ejecutamiento del menú
 do {
@@ -157,6 +160,7 @@ do {
             }
         break;
         case 5: 
+            //Modificar datos de un pasajero
             $buscar= true;
             $i=0;
             $pasajeros=$pasajerosRegistrados;
@@ -180,14 +184,54 @@ do {
                  }
                  $i++;
             }
+
+            /** Otra alternativa empezaría así:
+             * echo "****************************************** \n";
+             * echo "Ingrese el documento de la persona cuyos datos quiera modificar: ";
+             * $dniPasajeroPrevio=strtoupper(trim(fgets(STDIN)));
+             * $listaDePasajeros= $viajeEjemplo->getColleccionPasajeros();
+             * //BUSCA SI EL PASAJERO EXISTE
+             * $posColPasajero=$viajes->buscarPasajero($dniPasajeroPrevio);
+             * if($posColPasajero== -1){
+             *      echo "No se encontró al pasajero";
+             * }
+             * else{
+             * echo "ingrese nuevamente el nombre del pasajero: ";
+             * $nombrePasajero1=strtoupper(trim(fgets(STDIN)));
+             * echo "Ingrese nuevamente el apellido del pasajero: ";
+             * $apellidoPasajero1=strtoupper(trim(fgets(STDIN)));
+             * echo "Ingrese nuevamente el telefono del pasajero: ";
+             * $telefonoPasajero1=strtoupper(trim(fgets(STDIN)));
+             * echo "Ingrese nuevamente el DNI del pasajero: ";
+             * $dniPasajeroNuevo=strtoupper(trim(fgets(STDIN)));
+             * echo "****************************************** \n";
+             * 
+             * $viajeEjemplo=modificarPasajero($posColPasajero, $nombrePasajero1, $apellidoPasajero1, $telefonoPasajero1);
+             * echo "Los datos se modificaron con exito";
+             * echo $viajeEjemplo;
+             * }
+             
+             * 
+             * 
+             */
+
+
         break;
 
         case 6: 
             echo "****************************************** \n";
-            for ($i=0; $i < count($viajesRealizados); $i++){
+            /**for ($i=0; $i < count($viajesRealizados); $i++){
                 //$miViaje= $viajesRealizados[$i];
                 echo $viajesRealizados[$i];
             }
+            */
+            $viajesRealizados; 
+            $datosViajes="";
+            foreach($viajesRealizados as $objViajes){
+                //$viajesString=$viajes->__toString();
+                $datosViajes=$datosViajes . "\n" . $objViajes . "\n";
+        }
+            echo $datosViajes;
             echo "****************************************** \n";
         break;
     }

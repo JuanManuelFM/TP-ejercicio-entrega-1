@@ -39,7 +39,8 @@ class Pasajeros{
     }
 
     public function __toString(){
-        return ("Nombre del pasajero " . $this->getNombre(). " de apellido " . $this->getApellido() . "\n" . "Telefono: " . $this->getTelefono() . "\n" . "Numero de Documento: " . $this->getDocumento() . "\n");
+        $strPasajeros="Nombre del pasajero " . $this->getNombre(). " de apellido " . $this->getApellido() . "\n" . "Telefono: " . $this->getTelefono() . "\n" . "Numero de Documento: " . $this->getDocumento() . "\n";
+        return $strPasajeros;
 
     }
 
