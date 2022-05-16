@@ -160,62 +160,56 @@ do {
             }
         break;
         case 5: 
-            //Modificar datos de un pasajero
-            $buscar= true;
-            $i=0;
-            $pasajeros=$pasajerosRegistrados;
             echo "****************************************** \n";
-            echo "Ingrese el documento de la persona cuyo nombre, apellido y/o telefono quiera modificar: ";
-            $documentoPasajero1=strtoupper(trim(fgets(STDIN)));
-            while($i < count($pasajerosRegistrados) && $buscar){
-                $documentoEncontrar=$pasajerosRegistrados[$i]->getDocumento();
-                if($documentoEncontrar == $documentoPasajero1){
-                    $buscar= false;
-                    echo "ingrese nuevamente el nombre del pasajero: ";
-                    $nombrePasajero1=strtoupper(trim(fgets(STDIN)));
-                    $pasajerosRegistrados[$i]->setNombre($nombrePasajero1);
-                    echo "Ingrese nuevamente el apellido del pasajero: ";
-                    $apellidoPasajero1=strtoupper(trim(fgets(STDIN)));
-                    $pasajerosRegistrados[$i]->setApellido($apellidoPasajero1);
-                    echo "Ingrese nuevamente el telefono del pasajero: ";
-                    $telefonoPasajero1=strtoupper(trim(fgets(STDIN)));
-                    $pasajerosRegistrados[$i]->setTelefono($telefonoPasajero1);
-                    echo "****************************************** \n";
-                 }
-                 $i++;
+            echo "Ingrese el documento de la persona cuyos datos quiera modificar: ";
+            $dniPasajeroPrevio=strtoupper(trim(fgets(STDIN)));
+            $listaDePasajeros= $viajeEjemplo->getColeccionPasajeros();
+            //BUSCA SI EL PASAJERO EXISTE
+            $posColPasajero= $viajeEjemplo->buscarPasajero($dniPasajeroPrevio);
+            if($posColPasajero== -1){
+                 echo "No se encontró al pasajero";
             }
-
-            /** Otra alternativa empezaría así:
+            else{
+            echo "ingrese nuevamente el nombre del pasajero: ";
+            $nombrePasajero1=strtoupper(trim(fgets(STDIN)));
+            echo "Ingrese nuevamente el apellido del pasajero: ";
+            $apellidoPasajero1=strtoupper(trim(fgets(STDIN)));
+            echo "Ingrese nuevamente el telefono del pasajero: ";
+            $telefonoPasajero1=strtoupper(trim(fgets(STDIN)));
+            echo "Ingrese nuevamente el DNI del pasajero: ";
+            $dniPasajeroNuevo=strtoupper(trim(fgets(STDIN)));
+            echo "****************************************** \n";
+            
+            $viajeEjemplo->modificarPasajero($posColPasajero, $nombrePasajero1, $apellidoPasajero1, $telefonoPasajero1);
+            echo "Los datos se modificaron con exito";
+            echo $viajeEjemplo;
+            }
+            
+            //Modificar datos de un pasajero (VIEJO QUE HABIA CREADO)
+            /* $buscar= true;
+             * $i=0;
+             * $pasajeros=$pasajerosRegistrados;
              * echo "****************************************** \n";
-             * echo "Ingrese el documento de la persona cuyos datos quiera modificar: ";
-             * $dniPasajeroPrevio=strtoupper(trim(fgets(STDIN)));
-             * $listaDePasajeros= $viajeEjemplo->getColleccionPasajeros();
-             * //BUSCA SI EL PASAJERO EXISTE
-             * $posColPasajero=$viajes->buscarPasajero($dniPasajeroPrevio);
-             * if($posColPasajero== -1){
-             *      echo "No se encontró al pasajero";
+             * echo "Ingrese el documento de la persona cuyo nombre,  * apellido y/o telefono quiera modificar: ";
+             * $documentoPasajero1=strtoupper(trim(fgets(STDIN)));
+             * while($i < count($pasajerosRegistrados) && $buscar){
+             *     $documentoEncontrar=$pasajerosRegistrados[$i]->getDocumento();
+             *     if($documentoEncontrar == $documentoPasajero1){
+             *         $buscar= false;
+             *         echo "ingrese nuevamente el nombre del pasajero: ";
+             *         $nombrePasajero1=strtoupper(trim(fgets(STDIN)));
+             *         $pasajerosRegistrados[$i]->setNombre($nombrePasajero1);
+             *         echo "Ingrese nuevamente el apellido del pasajero: ";
+             *         $apellidoPasajero1=strtoupper(trim(fgets(STDIN)));
+             *         $pasajerosRegistrados[$i]->setApellido($apellidoPasajero1);
+             *         echo "Ingrese nuevamente el telefono del pasajero: ";
+             *         $telefonoPasajero1=strtoupper(trim(fgets(STDIN)));
+             *         $pasajerosRegistrados[$i]->setTelefono($telefonoPasajero1);
+             *         echo "****************************************** \n";
+             *      }
+             *      $i++;
              * }
-             * else{
-             * echo "ingrese nuevamente el nombre del pasajero: ";
-             * $nombrePasajero1=strtoupper(trim(fgets(STDIN)));
-             * echo "Ingrese nuevamente el apellido del pasajero: ";
-             * $apellidoPasajero1=strtoupper(trim(fgets(STDIN)));
-             * echo "Ingrese nuevamente el telefono del pasajero: ";
-             * $telefonoPasajero1=strtoupper(trim(fgets(STDIN)));
-             * echo "Ingrese nuevamente el DNI del pasajero: ";
-             * $dniPasajeroNuevo=strtoupper(trim(fgets(STDIN)));
-             * echo "****************************************** \n";
-             * 
-             * $viajeEjemplo=modificarPasajero($posColPasajero, $nombrePasajero1, $apellidoPasajero1, $telefonoPasajero1);
-             * echo "Los datos se modificaron con exito";
-             * echo $viajeEjemplo;
-             * }
-             
-             * 
-             * 
-             */
-
-
+            */
         break;
 
         case 6: 

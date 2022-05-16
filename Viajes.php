@@ -46,36 +46,27 @@ class Viajes{
         return $this->objResponsableV;
     }
     
-    /**METODO PARA BUSCAR UN PASAJERO, PARA AGREGAR O MODIFICAR SIRVE
-     * public function buscarPasajero($dniPasajeroBuscar){
-     * $arregloPasajeros= $this->getColeccionPasajeros();
-     * $posicionCo1= -1;
-     * $i = 0;
-     * $encontrado= false;
-     *      while ($i < count($arregloPasajeros) && !$encontrado){
-     *          $unPasajero = $arregloPasajeros[$i];
-     *          $encontrado = ($unPasajero->getDocumento() == $dniPasPrevio);
-     *          $i=$i+1;
-     *      }
-     * $posicionCo1= ($encontrado?($i-1):-1);
-     * return $posicionCo1;
-     * }
-     * 
-     * 
-     */
+    public function buscarPasajero($dniPasajeroBuscar){
+    $arregloPasajeros= $this->getColeccionPasajeros();
+    $posicionCo1= -1;
+    $i = 0;
+    $encontrado= false;
+         while ($i < count($arregloPasajeros) && !$encontrado){
+             $unPasajero = $arregloPasajeros[$i];
+             $encontrado = ($unPasajero->getDocumento() == $dniPasajeroBuscar);
+             $i=$i+1;
+         }
+    $posicionCo1= ($encontrado?($i-1):-1);
+    return $posicionCo1;
+    }
 
-
-    /*EN EL CASE 5 LO COMENTADO REQUERIRÍA DE LA SIGUIENTE FUNCIÓN
-    * public function modificarPasajero($posColPasajeroI, $nombrePasajeroI, $apellidoPasajeroI, $telefonoPasajeroI){
-    * $arregloPasajeros= $this->getColeccionPasajeros();
-    * $objPasajeroMod = $arregloPasajeros[$posColPasajeroI];
-    * $objPasajeroMod->setNombre($nombrePasajeroI);
-    * $objPasajeroMod->setApellido($apellidoPasajeroI);
-    * $objPasajeroMod->setTelefono($telefonoPasajeroI);
-    * }
-    * 
-    * 
-    */
+    public function modificarPasajero($posColPasajeroI, $nombrePasajeroI, $apellidoPasajeroI, $telefonoPasajeroI){
+    $arregloPasajeros= $this->getColeccionPasajeros();
+    $objPasajeroMod = $arregloPasajeros[$posColPasajeroI];
+    $objPasajeroMod->setNombre($nombrePasajeroI);
+    $objPasajeroMod->setApellido($apellidoPasajeroI);
+    $objPasajeroMod->setTelefono($telefonoPasajeroI);
+    }
 
     /**
      * Este modulo agrega un nuevo pasajero al final del array de pasajeros existente.
@@ -91,7 +82,7 @@ class Viajes{
         $arrayPasajeros= $this->getColeccionPasajeros(); 
         $datosPasajeros="";
         foreach($arrayPasajeros as $objPasajeros){
-            $datosPasajeros=$datosPasajeros . "\n" . $objPasajero . "\n";
+            $datosPasajeros=$datosPasajeros . "\n" . $objPasajeros . "\n";
         }
         return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros . "\n" . $this->getObjResponsableV() . "\n");
     }
