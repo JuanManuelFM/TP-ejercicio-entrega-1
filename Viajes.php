@@ -6,6 +6,9 @@ class Viajes{
     private $cantidadMaxPasajeros;
     private $coleccionPasajeros;
     private $objResponsableV;
+    private $asientos;
+    private $importe;
+    private $idaVuelta;
 
     public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $objResViaje){
         $this->codigo=$unCodigo;
@@ -13,6 +16,10 @@ class Viajes{
         $this->cantidadMaxPasajeros=$pasajeros;
         $this->coleccionPasajeros=$pasajerosRegistrados;
         $this->objResponsableV=$objResViaje;
+        $this->asientos=10;
+        $this->importe=5000;
+        //en mi caso hice que todos los asientos sean ida y vuelta
+        $this->idaVuelta=true;
     }
     public function setCodigo($unCodigo){
         $this->codigo=$unCodigo;
@@ -28,6 +35,15 @@ class Viajes{
     }
     public function setObjResponsableV($objResViaje){
         $this->objResponsableV=$objResViaje;
+    }
+    public function setAsientos(){
+        $this->asientos=10;
+    }
+    public function setImporte(){
+        $this->asientos=5000;
+    }
+    public function setIdaVuelta(){
+        $this->asientos=true;
     }
 
     public function getCodigo(){
@@ -45,7 +61,30 @@ class Viajes{
     public function getObjResponsableV(){
         return $this->objResponsableV;
     }
+    public function getAsientos(){
+        $this->asientos;
+    }
+    public function getImporte(){
+        $this->asientos;
+    }
+    public function getIdaVuelta(){
+        $this->asientos;
+    }
     
+    public function venderPasaje($pasajerosCompradores){
+
+    }
+
+    public function hayPasajesDisponible(){
+        $cantPasajerosMaxima = $this->getCantidadMaxPasajeros();
+        $cantAsientosDisponibles = $this->getAsientos();
+        $lugar = false;
+        if($cantAsientosDisponibles < $cantPasajerosMaxima){
+           $lugar = true;
+        }
+        return $lugar;
+    }
+
     public function buscarPasajero($dniPasajeroBuscar){
     $arregloPasajeros= $this->getColeccionPasajeros();
     $posicionCo1= -1;
@@ -84,7 +123,7 @@ class Viajes{
         foreach($arrayPasajeros as $objPasajeros){
             $datosPasajeros=$datosPasajeros . "\n" . $objPasajeros . "\n";
         }
-        return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros . "\n" . $this->getObjResponsableV() . "\n");
+        return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros . "\n" . $this->getObjResponsableV() . "\n" . "Hay " . $this->getAsientos() . " disponibles actualmente cuyo importe inicial es de $" . $this->getImporte() . " sin tener en cuenta gastos extras" . "\n");
     }
 }
 

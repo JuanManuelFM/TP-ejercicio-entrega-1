@@ -34,13 +34,14 @@ function solicitarNumeroEntre($min, $max)
 
 function seleccionarOpcion() {
     $minimo = 1;
-    $maximo = 6;
+    $maximo = 7;
         echo"1) :-----------Crear nuevo viaje-----------: \n";
         echo"2) :------Modificar datos de un viaje------: \n";
         echo"3) :---Agregar responsable a viaje creado--: \n";
         echo"4) :-Agregar pasajero a viaje ya existente-: \n";
         echo"5) :-----Modificar datos de un pasajero----: \n";
         echo"6) :-----Ver datos de viajes realizados----: \n";
+        echo"7) :--------Realizar venta de pasaje-------: \n";
         $opcion = solicitarNumeroEntre($minimo, $maximo);
         // Function solicitarNumeroEntre($min, $max), reusada el archivo tateti.php
     return $opcion;
@@ -57,7 +58,7 @@ $p2= new Pasajeros("DAVID", "MARTINEZ", "456", "43948490");
 $pasajerosRegistrados[0]=$p1;
 $pasajerosRegistrados[1]=$p2;
 
-$viajeEjemplo= new Viajes("456", "MADRID", 3, $pasajerosRegistrados, $objResViaje);
+$viajeEjemplo= new Viajes("456", "MADRID", 10, $pasajerosRegistrados, $objResViaje);
 $viajeEjemplo->setColeccionPasajeros($pasajerosRegistrados);
 $viajesRealizados[0]=$viajeEjemplo;
 
@@ -228,8 +229,13 @@ do {
             echo $datosViajes;
             echo "****************************************** \n";
         break;
+        case 7: 
+            echo "****************************************** \n";
+            echo "Clases creadas pero aún no implementadas \n";
+            echo "****************************************** \n";
+        break;
     }
-} while (($opcion <= 6) && ($opcion >= 1));
+} while (($opcion <= 7) && ($opcion >= 1));
 
 
 
