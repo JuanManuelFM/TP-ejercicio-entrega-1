@@ -62,13 +62,13 @@ class Viajes{
         return $this->objResponsableV;
     }
     public function getAsientos(){
-        $this->asientos;
+        return $this->asientos;
     }
     public function getImporte(){
-        $this->importe;
+        return $this->importe;
     }
     public function getIdaVuelta(){
-        $this->idaVuelta;
+        return $this->idaVuelta;
     }
 
     public function hayPasajesDisponible(){
