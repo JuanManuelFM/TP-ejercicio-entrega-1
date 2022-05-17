@@ -10,16 +10,16 @@ class Viajes{
     private $importe;
     private $idaVuelta;
 
-    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $objResViaje){
+    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $objResViaje, $asientosDisponiblesViaje, $importeViaje, $esIdaVuelta){
         $this->codigo=$unCodigo;
         $this->destino=$unDestino;
         $this->cantidadMaxPasajeros=$pasajeros;
         $this->coleccionPasajeros=$pasajerosRegistrados;
         $this->objResponsableV=$objResViaje;
-        $this->asientos=10;
-        $this->importe=5000;
+        $this->asientos=$asientosDisponiblesViaje;
+        $this->importe=$importeViaje;
         //en mi caso hice que todos los asientos sean ida y vuelta
-        $this->idaVuelta=true;
+        $this->idaVuelta=$esIdaVuelta;
     }
     public function setCodigo($unCodigo){
         $this->codigo=$unCodigo;
@@ -36,14 +36,14 @@ class Viajes{
     public function setObjResponsableV($objResViaje){
         $this->objResponsableV=$objResViaje;
     }
-    public function setAsientos(){
-        $this->asientos=10;
+    public function setAsientos($asientosDisponiblesViaje){
+        $this->asientos=$asientosDisponiblesViaje;
     }
     public function setImporte(){
-        $this->asientos=5000;
+        $this->importe=$importeViaje;
     }
     public function setIdaVuelta(){
-        $this->asientos=true;
+        $this->idaVuelta=$esIdaVuelta;
     }
 
     public function getCodigo(){
@@ -65,10 +65,10 @@ class Viajes{
         $this->asientos;
     }
     public function getImporte(){
-        $this->asientos;
+        $this->importe;
     }
     public function getIdaVuelta(){
-        $this->asientos;
+        $this->idaVuelta;
     }
 
     public function hayPasajesDisponible(){

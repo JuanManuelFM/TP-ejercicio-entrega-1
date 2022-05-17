@@ -59,7 +59,7 @@ $p2= new Pasajeros("DAVID", "MARTINEZ", "456", "43948490");
 $pasajerosRegistrados[0]=$p1;
 $pasajerosRegistrados[1]=$p2;
 
-$viajeEjemplo= new Viajes("456", "MADRID", 10, $pasajerosRegistrados, $objResViaje);
+$viajeEjemplo= new Viajes("456", "MADRID", 15, $pasajerosRegistrados, $objResViaje, 10, 5000, true);
 $viajeEjemplo->setColeccionPasajeros($pasajerosRegistrados);
 $viajesRealizados[0]=$viajeEjemplo;
 
@@ -144,7 +144,7 @@ do {
                         $viajesRealizados[$j]->setObjResponsableV($responsableCargo);
                     }
                     else{
-                        echo "Ya existe un responsable a cargo";
+                        echo "Ya existe un responsable a cargo \n";
                         echo "****************************************** \n";
                     }
                 }
