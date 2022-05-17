@@ -44,23 +44,29 @@ class Aereos extends Viajes{
         return $this->escalas;
     }
 
-    public function ImporteViajeAereo(){
-        $importe= $this->getImporte();
-        $importeTotal= $this->getImporte();
-        $categoria= $this->getCategoriaAsiento();
-        $hayEscalas= $this->getEscalas();
-        if ($hayEscalas == true){
-            $importeTotal= $importe + (($importe*20)/100);
-            $this->setImporte($importeTotal);
+    public function venderPasaje($pasajero){
+        if ($this->hayPasajesDisponibles() == true){
+            $importe= $this->getImporte();
+            $importeTotal= $this->getImporte();
+            $categoria= $this->getCategoriaAsiento();
+            $hayEscalas= $this->getEscalas();
+            if ($hayEscalas == true){
+                $importeTotal= $importe + (($importe*20)/100);
+                $this->setImporte($importeTotal);
+            }
+            if ($categoria == "Primera Clase"){
+                $importeTotal= $importe + (($importe*40)/100);
+                $this->setImporte($importeTotal);
+            }
+            if ($idaVuelta == true){
+                $importeTotal= $importe + (($importe*50)/100);
+                $this->setImporte($importeTotal);
+            }
+            $asientosActualizado= $this->getAsientos();
+            $asientosActualizado= $asientosActualizado - 1;
+            $this->setAsientos($asientosActualizado);
         }
-        if ($categoria == "Primera Clase"){
-            $importeTotal= $importe + (($importe*40)/100);
-            $this->setImporte($importeTotal);
-        }
-        if ($idaVuelta == true){
-            $importeTotal= $importe + (($importe*50)/100);
-            $this->setImporte($importeTotal);
-        }
+        
         return $importeTotal;
     }
 

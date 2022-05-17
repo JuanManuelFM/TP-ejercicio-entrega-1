@@ -70,10 +70,6 @@ class Viajes{
     public function getIdaVuelta(){
         $this->asientos;
     }
-    
-    public function venderPasaje($pasajerosCompradores){
-
-    }
 
     public function hayPasajesDisponible(){
         $cantPasajerosMaxima = $this->getCantidadMaxPasajeros();

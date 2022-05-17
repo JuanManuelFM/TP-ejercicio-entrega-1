@@ -4,8 +4,11 @@ include 'Pasajeros.php';
 include 'ResponsableV.php';
 
 /**
- * Modificar la clase Viaje para que ahora los pasajeros sean un objeto que tenga los atributos nombre, apellido, numero de documento y teléfono. El viaje ahora contiene una referencia a una colección de objetos de la clase Pasajero. También se desea guardar la información de la persona responsable de realizar el viaje, para ello cree una clase ResponsableV que registre el número de empleado, número de licencia, nombre y apellido. La clase Viaje debe hacer referencia al responsable de realizar el viaje. 
-Volver a implementar las operaciones que permiten modificar el nombre, apellido y teléfono de un pasajero. Luego implementar la operación que agrega los pasajeros al viaje, solicitando por consola la información de los mismos. Se debe verificar que el pasajero no este cargado mas de una vez en el viaje. De la misma forma cargue la información del responsable del viaje.
+ * La empresa de transporte desea gestionar la información correspondiente a los Viajes que pueden ser: Terrestres o Aéreos,   guardar su importe e indicar si el viaje es de ida y vuelta. De los viajes aéreos se conoce el número del vuelo, la categoría del asiento (primera clase o no), nombre de la aerolínea, y la cantidad de escalas del vuelo en caso de tenerlas. De los viajes terrestres se conoce la comodidad del asiento, si es semicama o cama.
+
+ La empresa ahora necesita implementar la venta de un pasaje, para ello debe realizar la función venderPasaje (pasajero) que registra la venta de un viaje al pasajero que es recibido por parámetro. La venta se realiza  solo si hayPasajesDisponible. Si el viaje es terrestre y el asiento es cama, se incrementa el importe un 25%.  Si el viaje es aéreo y el asiento es primera clase sin escalas, se incrementa un 40%, si el viaje además de ser  un asiento de primera clase, el vuelo tiene escalas se incrementa el importe del viaje un 60%. Tanto para  viajes terrestres o aéreos, si el viaje es ida y vuelta, se incrementa el importe del viaje un 50%. El método  retorna el importe del pasaje si se pudo realizar la venta.
+
+ Implemente la función hayPasajesDisponible() que retorna verdadero si la cantidad de pasajeros del viaje es  menor a la cantidad máxima de pasajeros y falso caso contrario.
  */
 
 /**
@@ -24,8 +27,6 @@ function solicitarNumeroEntre($min, $max)
     }
     return $numero;
 }
-
-
 
 /**
  * Función que muestra las opciones del menú en la pantalla
@@ -120,9 +121,37 @@ do {
             }
         break;
         case 3: 
+            $buscaViaje= true;
+            $j=0;
             echo "****************************************** \n";
-            echo "Clase responsable creada pero aún no implementada \n";
-            echo "****************************************** \n";
+            echo "Ingrese el código del viaje en el que desea agregar un responsable: ";
+            $codViajeGuardado=strtoupper(trim(fgets(STDIN)));
+            while($j < count($viajesRealizados) && $buscaViaje){
+                $codigoBuscado=$viajesRealizados[$j]->getCodigo();
+                if($codViajeGuardado == $codigoBuscado){
+                    $buscaViaje= false;
+                    if($objResViaje == null){
+                        echo "ingrese nombre del nuevo responsable: ";
+                        $nombreResponsableV=strtoupper(trim(fgets(STDIN)));
+                        echo "Ingrese apellido del responsable: ";
+                        $apellidoResponsableV=strtoupper(trim(fgets(STDIN)));
+                        echo "Ingrese numero de empleado del responsable: ";
+                        $numEmpleadoV=strtoupper(trim(fgets(STDIN)));
+                        echo "Ingrese numero de licencia del responsable: ";
+                        $numlicenciaV=strtoupper(trim(fgets(STDIN)));
+                        echo "****************************************** \n";
+                        $responsableCargo= new ResponsableV($nombreResponsableV, $apellidoResponsableV, $numEmpleadoV, $numlicenciaV);
+                        $viajesRealizados[$j]->setObjResponsableV($responsableCargo);
+                    }
+                    else{
+                        echo "Ya existe un responsable a cargo";
+                        echo "****************************************** \n";
+                    }
+                }
+                else{
+                    $p++;
+                }
+            }
         break;
         case 4: 
             $buscandoViaje= true;
