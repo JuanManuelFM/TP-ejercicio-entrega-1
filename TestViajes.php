@@ -52,7 +52,7 @@ function seleccionarOpcion() {
 $viajesRealizados=[];
 $pasajerosRegistrados=[];
 //Datos pasajeros predefinidos para chequear funcionalidad de opciones del menú
-//public function __construct($numEmpleado, $numlicencia, $nombreResponsable, $apellidoResponsable)
+//($numEmpleado, $numlicencia, $nombreResponsable, $apellidoResponsable)
 $objResViaje= new ResponsableV("GUILLERMO", "PEROJO", "1234", "45678");
 $p1= new Pasajeros("JUAN", "MARTIN", "345", "43948491");
 $p2= new Pasajeros("DAVID", "MARTINEZ", "456", "43948490");
@@ -62,6 +62,19 @@ $pasajerosRegistrados[1]=$p2;
 $viajeEjemplo= new Viajes("456", "MADRID", 15, $pasajerosRegistrados, $objResViaje, 10, 5000, true);
 $viajeEjemplo->setColeccionPasajeros($pasajerosRegistrados);
 $viajesRealizados[0]=$viajeEjemplo;
+
+//($unCodigo, $unDestino,$pasajeros, $pasajerosRegistrados, $objResViaje,$tipoDeAsiento, $importeViaje, $esIdaVuelta)
+$objViajeTerrestre= new Terrestres();
+//new de terrestre para crear un viaje especificamente terrestre, lo mismo pasaría con aereo
+
+//($unCodigo, $unDestino,$pasajeros, $pasajerosRegistrados, $objResViaje,$tipoDeAsiento, $importeViaje, $esIdaVuelta, $nroDeVuelo, $nombreAereolinea, $hayEscalas)
+$objViajeAereo= new Aereos();
+
+//Venta de un viaje terrestre y aereo
+$importeViaje= $objViajeTerrestre-> venderPasaje($objPasajeros);
+$importeViajeAereo= $objViajeAereo-> venderPasaje($objPasajeros);
+echo $importeViaje;
+
 
 //Proceso de ejecutamiento del menú
 do {

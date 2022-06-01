@@ -6,17 +6,17 @@ class Viajes{
     private $cantidadMaxPasajeros;
     private $coleccionPasajeros;
     private $objResponsableV;
-    private $asientos;
+    private $tipoAsiento;
     private $importe;
     private $idaVuelta;
 
-    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $objResViaje, $asientosDisponiblesViaje, $importeViaje, $esIdaVuelta){
+    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $objResViaje, $tipoDeAsiento, $importeViaje, $esIdaVuelta){
         $this->codigo=$unCodigo;
         $this->destino=$unDestino;
         $this->cantidadMaxPasajeros=$pasajeros;
         $this->coleccionPasajeros=$pasajerosRegistrados;
         $this->objResponsableV=$objResViaje;
-        $this->asientos=$asientosDisponiblesViaje;
+        $this->tipoAsiento=$tipoDeAsiento;
         $this->importe=$importeViaje;
         //en mi caso hice que todos los asientos sean ida y vuelta
         $this->idaVuelta=$esIdaVuelta;
@@ -36,8 +36,8 @@ class Viajes{
     public function setObjResponsableV($objResViaje){
         $this->objResponsableV=$objResViaje;
     }
-    public function setAsientos($asientosDisponiblesViaje){
-        $this->asientos=$asientosDisponiblesViaje;
+    public function setAsientos($tipoDeAsiento){
+        $this->tipoAsiento=$tipoDeAsiento;
     }
     public function setImporte(){
         $this->importe=$importeViaje;
@@ -61,8 +61,8 @@ class Viajes{
     public function getObjResponsableV(){
         return $this->objResponsableV;
     }
-    public function getAsientos(){
-        return $this->asientos;
+    public function getTipoAsiento(){
+        return $this->tipoAsiento;
     }
     public function getImporte(){
         return $this->importe;
@@ -72,13 +72,26 @@ class Viajes{
     }
 
     public function hayPasajesDisponible(){
-        $cantPasajerosMaxima = $this->getCantidadMaxPasajeros();
-        $cantAsientosDisponibles = $this->getAsientos();
         $lugar = false;
-        if($cantAsientosDisponibles < $cantPasajerosMaxima){
+        if(count($this->getCollecionPasajeros) < $this->getCantidadMaxPasajeros()){
            $lugar = true;
         }
         return $lugar;
+    }
+
+    public function venderPasaje($objPasajeros){
+        $importe= 5000;
+        if($this->$hayPasajesDisponibles()){
+            $this->agregarPasajero($objPasajeros);
+            $importe= $this->getImporte();
+            //como ambos tipos de viaje aumentan el pasaje según si son ida y vuelta puedo poner el incremento en la función padre
+            if($this->getIdaVuelta()){
+                //50% más al ser ida y vuelta, también se puede escribir * 1.50
+                $importe= $importe + (($importe*50)/100);
+                $this->setImporte($importe);
+            }
+        }
+        return $importe;
     }
 
     public function buscarPasajero($dniPasajeroBuscar){
@@ -117,9 +130,9 @@ class Viajes{
         $arrayPasajeros= $this->getColeccionPasajeros(); 
         $datosPasajeros="";
         foreach($arrayPasajeros as $objPasajeros){
-            $datosPasajeros=$datosPasajeros . "\n" . $objPasajeros . "\n";
+            $datosPasajeros=$datosPasajeros . "\n" . $objPasajeros;
         }
-        return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros . "\n" . $this->getObjResponsableV() . "\n" . "Hay " . $this->getAsientos() . " disponibles actualmente cuyo importe inicial es de $" . $this->getImporte() . " sin tener en cuenta gastos extras" . "\n");
+        return ("Codigo de viaje " . $this->getCodigo(). " con destino a " . $this->getDestino() . "\n" . "Cantidad de pasajeros " . $this->getCantidadMaxPasajeros() . "\n" . $datosPasajeros . "\n" . $this->getObjResponsableV() . "\n");
     }
 }
 

@@ -3,21 +3,9 @@ include 'Viajes.php';
 
 class Terrestre extends Viajes{
     //clase que representa viajes terrestres
-    private $comodidadAsiento;
-    public function __construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $objResViaje, $cantAsientos, $comodidadDeAsiento){
-            //constructor Terrestre
-        parent::__construct($unCodigo, $unDestino, $pasajeros, $pasajerosRegistrados, $objResViaje, $cantAsientos);
-            //agregamos atributo nuevo
-        $this->$comodidadAsiento= $comodidadDeAsiento;
-    }
-
-    public function setComodidadAsiento($comodidadDeAsiento){
-        $this->comodidadAsiento= $comodidadDeAsiento;
-    }
-
-    public function getComodidadAsiento(){
-        return $this->comodidadAsiento;
-    }
+    public function __construct($unCodigo, $unDestino,$pasajeros, $pasajerosRegistrados, $objResViaje,$tipoDeAsiento, $importeViaje, $esIdaVuelta){
+        //constructor Viajes
+        parent::__construct($unCodigo, $unDestino,$pasajeros, $pasajerosRegistrados, $objResViaje,$tipoDeAsiento, $importeViaje, $esIdaVuelta);}
 
     public function ImporteViajeTerrestre(){
         $importe= $this->getImporte();
@@ -35,28 +23,19 @@ class Terrestre extends Viajes{
     }
 
     public function venderPasaje($pasajero){
-        if ($this->hayPasajesDisponibles() == true){
-            $importe= $this->getImporte();
-            $importeTotal= $this->getImporte();
-            $tipoAsiento= $this->getComodidadAsiento();
+            $importe= parent:: venderPasaje($pasajero);
+            $tipoAsiento= $this->getTipoAsiento();
             if ($tipoAsiento == "CAMA"){
-                $importeTotal= $importe + (($importe*25)/100);
-                $this->setImporte($importeTotal);
+                //25% más al ser cama, también se escribe * 1.25
+                $importe= $importe + (($importe*25)/100);
+                $this->setImporte($importe);
             }
-            if ($idaVuelta == true){
-                $importeTotal= $importe + (($importe*50)/100);
-                $this->setImporte($importeTotal);
-            }
-            $asientosActualizado= $this->getAsientos();
-            $asientosActualizado= $asientosActualizado - 1;
-            $this->setAsientos($asientosActualizado);
-        }
-        return $importeTotal;
+        return $importe;
     }
 
     public function __toString(){
         $cadenaTerrestre= parent::__toString();
-        $cadenaTerrestre= "El tipo de asiento de vuelo terrestre es: " . $this->getComodidadAsiento() . " por lo que el nuevo monto será de $" . $this->getImporte() . "\n"; 
+        $cadenaTerrestre= "El tipo de asiento de vuelo terrestre es: " . $this->getTipoAsiento() . " por lo que el nuevo monto será de $" . $this->getImporte() . "\n"; 
     }
 
 
