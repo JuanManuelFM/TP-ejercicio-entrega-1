@@ -2,6 +2,8 @@
 include 'Viajes.php';
 include 'Pasajeros.php';
 include 'ResponsableV.php';
+include 'Terrestre.php';
+include 'Aereo.php';
 
 /**
  * La empresa de transporte desea gestionar la información correspondiente a los Viajes que pueden ser: Terrestres o Aéreos,   guardar su importe e indicar si el viaje es de ida y vuelta. De los viajes aéreos se conoce el número del vuelo, la categoría del asiento (primera clase o no), nombre de la aerolínea, y la cantidad de escalas del vuelo en caso de tenerlas. De los viajes terrestres se conoce la comodidad del asiento, si es semicama o cama.
@@ -59,16 +61,16 @@ $p2= new Pasajeros("DAVID", "MARTINEZ", "456", "43948490");
 $pasajerosRegistrados[0]=$p1;
 $pasajerosRegistrados[1]=$p2;
 
-$viajeEjemplo= new Viajes("456", "MADRID", 15, $pasajerosRegistrados, $objResViaje, 10, 5000, true);
+$viajeEjemplo= new Viaje("456", "MADRID", 15, $pasajerosRegistrados, $objResViaje, 10, 5000, true);
 $viajeEjemplo->setColeccionPasajeros($pasajerosRegistrados);
 $viajesRealizados[0]=$viajeEjemplo;
 
 //($unCodigo, $unDestino,$pasajeros, $pasajerosRegistrados, $objResViaje,$tipoDeAsiento, $importeViaje, $esIdaVuelta)
-$objViajeTerrestre= new Terrestres();
+$objViajeTerrestre= new Terrestre();
 //new de terrestre para crear un viaje especificamente terrestre, lo mismo pasaría con aereo
 
 //($unCodigo, $unDestino,$pasajeros, $pasajerosRegistrados, $objResViaje,$tipoDeAsiento, $importeViaje, $esIdaVuelta, $nroDeVuelo, $nombreAereolinea, $hayEscalas)
-$objViajeAereo= new Aereos();
+$objViajeAereo= new Aereo();
 
 //Venta de un viaje terrestre y aereo
 $importeViaje= $objViajeTerrestre-> venderPasaje($objPasajeros);
@@ -89,7 +91,7 @@ do {
                 echo ">--Ingrese cantidad de pasajeros: ";
                 $pasajeros=trim(fgets(STDIN));
                 echo "****************************************** \n";
-                $viaje= new Viajes($unCodigo, $unDestino, $pasajeros);
+                $viaje= new Viaje($unCodigo, $unDestino, $pasajeros);
                 
                 for($j = 0; $j < $pasajeros; $j++){
                     if ($j <= $pasajeros){

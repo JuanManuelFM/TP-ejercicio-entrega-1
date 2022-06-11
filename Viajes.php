@@ -1,5 +1,5 @@
 <?php
-class Viajes{
+class Viaje{
     //atributos
     private $codigo;
     private $destino;
@@ -39,10 +39,10 @@ class Viajes{
     public function setAsientos($tipoDeAsiento){
         $this->tipoAsiento=$tipoDeAsiento;
     }
-    public function setImporte(){
+    public function setImporte($importeViaje){
         $this->importe=$importeViaje;
     }
-    public function setIdaVuelta(){
+    public function setIdaVuelta($esIdaVuelta){
         $this->idaVuelta=$esIdaVuelta;
     }
 
@@ -79,21 +79,6 @@ class Viajes{
         return $lugar;
     }
 
-    public function venderPasaje($objPasajeros){
-        $importe= 5000;
-        if($this->$hayPasajesDisponibles()){
-            $this->agregarPasajero($objPasajeros);
-            $importe= $this->getImporte();
-            //como ambos tipos de viaje aumentan el pasaje según si son ida y vuelta puedo poner el incremento en la función padre
-            if($this->getIdaVuelta()){
-                //50% más al ser ida y vuelta, también se puede escribir * 1.50
-                $importe= $importe + (($importe*50)/100);
-                $this->setImporte($importe);
-            }
-        }
-        return $importe;
-    }
-
     public function buscarPasajero($dniPasajeroBuscar){
     $arregloPasajeros= $this->getColeccionPasajeros();
     $posicionCo1= -1;
@@ -120,10 +105,25 @@ class Viajes{
      * Este modulo agrega un nuevo pasajero al final del array de pasajeros existente.
      * @param object $nuevoObjPasajero
     */
-    public function agregarPasajeros($nuevoObjPasajero){
+    public function agregarPasajero($nuevoObjPasajero){
         $arrayPasajeros = $this->getColeccionPasajeros();
         array_push($arrayPasajeros, $nuevoObjPasajero);
         $this->setColeccionPasajeros($arrayPasajeros);
+    }
+
+    public function venderPasaje($objPasajeros){
+        $importe= 5000;
+        if($this->hayPasajesDisponible()){
+            $this->agregarPasajero($objPasajeros);
+            $importe= $this->getImporte();
+            //como ambos tipos de viaje aumentan el pasaje según si son ida y vuelta puedo poner el incremento en la función padre
+            if($this->getIdaVuelta()){
+                //50% más al ser ida y vuelta, también se puede escribir * 1.50
+                $importe= $importe + (($importe*50)/100);
+                $this->setImporte($importe);
+            }
+        }
+        return $importe;
     }
 
     public function __toString(){

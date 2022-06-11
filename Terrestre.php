@@ -1,7 +1,6 @@
 <?php
-include 'Viajes.php';
 
-class Terrestre extends Viajes{
+class Terrestre extends Viaje{
     //clase que representa viajes terrestres
     public function __construct($unCodigo, $unDestino,$pasajeros, $pasajerosRegistrados, $objResViaje,$tipoDeAsiento, $importeViaje, $esIdaVuelta){
         //constructor Viajes
@@ -10,12 +9,12 @@ class Terrestre extends Viajes{
     public function ImporteViajeTerrestre(){
         $importe= $this->getImporte();
         $importeTotal= $this->getImporte();
-        $tipoAsiento= $this->getComodidadAsiento();
+        $tipoAsiento= $this->getTipoAsiento();
         if ($tipoAsiento == "CAMA"){
             $importeTotal= $importe + (($importe*25)/100);
             $this->setImporte($importeTotal);
         }
-        if ($idaVuelta == true){
+        if ($this->getIdaVuelta() == true){
             $importeTotal= $importe + (($importe*50)/100);
             $this->setImporte($importeTotal);
         }

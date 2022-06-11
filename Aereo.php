@@ -1,7 +1,6 @@
 <?php
-include 'Viajes.php';
 
-class Aereos extends Viajes{
+class Aereo extends Viaje{
     //clase que representa viajes Aereos
     private $nroVuelo;
     private $aereolinea;
@@ -11,9 +10,9 @@ class Aereos extends Viajes{
             //Invocamos constructor persona
             parent::__construct($unCodigo, $unDestino,$pasajeros, $pasajerosRegistrados, $objResViaje, $tipoDeAsiento, $importeViaje, $esIdaVuelta);
             //agregamos atributo nuevo
-            $this->$nroVuelo= $nroDeVuelo;
-            $this->$aereolinea= $nombreAereolinea;
-            $this->$escalas= $hayEscalas;
+            $this->nroVuelo= $nroDeVuelo;
+            $this->aereolinea= $nombreAereolinea;
+            $this->escalas= $hayEscalas;
         }
 
     public function setNroVuelo($nroDeVuelo){
@@ -42,7 +41,7 @@ class Aereos extends Viajes{
         //usamos el $this-> porque no estamos redifiniendo, solo llamamos un atributo de la clase padre
         $tipoAsiento= $this->getTipoAsiento();
             if ($tipoAsiento == "PRIMERA CLASE"){
-                if ($hayEscalas == true){
+                if ($this->getEscalas() == true){
                     //Al ser primera clase y con escalas incrementa un 60% (* 1.6)
                     $importe= $importe + (($importe*60)/100);
                     $this->setImporte($importe);
