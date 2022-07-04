@@ -79,7 +79,7 @@ echo $importeViaje;
 
 
 //Proceso de ejecutamiento del menú
-do {
+do{
     $opcion = seleccionarOpcion();
     switch ($opcion) {
         case 1: 
